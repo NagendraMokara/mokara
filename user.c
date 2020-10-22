@@ -9,18 +9,25 @@
 #include <getopt.h>
 
 
-void childProcess(FILE *filePointer,int segmentId,time_t time, pid_t myPid){
-	int pid=fork();
-	if (pid==0){
-			fprintf(filePointer,"Child Process Starts At: %ld\n", time);
-			myPid=getpid();
-			char *shmADDRESSS=shmat(segmentId,NULL,0);
-				if (!shmADDRESSS){
-					perror("shmat");
-					exit(1);
-				}
-			sleep(2);
-			fprintf(filePointer,"Child Process Terminates At: %ld\n",time);
-			exit(1);
-		}
+void childProcess(FILE *filePointer,int segmentId,pid_t myPid){
+
+	
+		time_t seconds;
+		int pid=fork();
+		if (pid==0){
+				time(&seconds);
+				myPid=getpid();
+				fprintf(filePointer,"Master: Starting Child Process\n");				
+				fprintf(filePointer,"Master: Child PID: %jd Starting At: %s\n", (__intmax_t)myPid,ctime(&seconds));
+				char *shmADDRESSS=shmat(segmentId,NULL,0);
+					if (!shmADDRESSS){
+						perror("shmat");
+						exit(1);
+					}
+				sleep(2);
+				time(&seconds);
+				fprintf(filePointer,"Master: Child PID: %jd Terminates At: %s\n\n\n\n", (__intmax_t)myPid,ctime(&seconds));
+				exit(1);
+			}
+		
 }
