@@ -9,4 +9,4 @@ To Run This Program:
 	Run The Following Commands:
 		-gcc oss.c to (compile)
 		-./a.out to (run)
-	-Examine logfile.txt
+	-$ cat logfile.txt
