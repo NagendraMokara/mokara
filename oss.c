@@ -16,7 +16,7 @@ struct Clock{
 };
 
 int main(int argc, char *argv[]){
-	time_t seconds;
+	
 	char *shmADDRESS;
 	int key=99999;
 	int shmID;
@@ -40,7 +40,10 @@ int main(int argc, char *argv[]){
 			}
 		printf("Address: %s\n", shmADDRESS);
 		//Creating A child process that will read and write to the shared memory segment.
-		childProcess(fp,shmID,seconds,mypid);
+		for (int i=1; i<100; i++){
+		childProcess(fp,shmID,mypid);
+		
+		}
 	}
 	fclose(fp);
 	return 0;
