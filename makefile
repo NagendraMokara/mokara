@@ -1,5 +1,5 @@
 
-default: testsim runsim
+default: oss user
 
 clear:
 	rm -f oss user
