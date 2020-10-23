@@ -1,11 +1,24 @@
+CC = gcc 
+CFLAGS = -g -w -std=c99
+TARGET = oss
+TARGET1 = user
+OBJS = oss.o
+OBJS1 = user.o
+LOG = logfile.txt
+.SUFFIXES: .c .o
 
-default: oss user
+all : $(TARGET) $(TARGET1) 
 
-clear:
-	rm -f oss user
+$(TARGET1): $(OBJS1)
+	$(CC) -o $@ $(OBJS1) -lpthread
 
-oss: oss.c
-	gcc -Wall -ggdb -Werror -o oss oss.c
+$(TARGET): $(OBJS)
+	$(CC)-o $@ $(OBJS) -lpthread -lm
 
-user: user.c
-	gcc -Wall -ggdb -Werror -o user user.c
+.c.o:
+	$(CC) $(CFLAGS) -c $<
+
+.PHONY: clean
+clean:
+	rm -f *.o *.log *~ *.txt $(LIB) $(TARGET) $(TARGET1) $(LOG) 
+
