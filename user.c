@@ -7,6 +7,7 @@
 #include <sys/shm.h>
 #include <time.h>
 #include <getopt.h>
+#include <inttypes.h>
 
 
 void childProcess(FILE *filePointer,int segmentId,pid_t myPid){
