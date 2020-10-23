@@ -18,7 +18,7 @@ void childProcess(FILE *filePointer,int segmentId,pid_t myPid){
 				time(&seconds);
 				myPid=getpid();
 				fprintf(filePointer,"Master: Starting Child Process\n");				
-				fprintf(filePointer,"Master: Child PID: %jd Starting At: %s\n", (__intmax_t)myPid,ctime(&seconds));
+				fprintf(filePointer,"Master: Child PID: %jd Starting At: %s\n", (_intmax_t)myPid,ctime(&seconds));
 				char *shmADDRESSS=shmat(segmentId,NULL,0);
 					if (!shmADDRESSS){
 						perror("shmat");
@@ -26,7 +26,7 @@ void childProcess(FILE *filePointer,int segmentId,pid_t myPid){
 					}
 				sleep(2);
 				time(&seconds);
-				fprintf(filePointer,"Master: Child PID: %jd Terminates At: %s\n\n\n\n", (__intmax_t)myPid,ctime(&seconds));
+				fprintf(filePointer,"Master: Child PID: %jd Terminates At: %s\n\n\n\n", (_intmax_t)myPid,ctime(&seconds));
 				exit(1);
 			}
 		
